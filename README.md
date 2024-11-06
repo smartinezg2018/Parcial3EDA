@@ -2,9 +2,13 @@
 Realizado por Simón Martínez
 
 INSERT INTO clientes (nombre,edad) ('Juan',22);
+
 INSERT INTO clientes (nombre,edad) ('Laura',24);
+
 INSERT INTO clientes (nombre,edad) ('Luis',29);
+
 INSERT INTO clientes (nombre,edad) ('Maria',31);
+
 
 UPDATE clientes SET edad=68 WHERE nombre='Laura';
 
