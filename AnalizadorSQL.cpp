@@ -3,11 +3,12 @@
 #include "ArbolBPlus.h"
 
 
-// Constructor de AnalizadorSQL que recibe un árbol B+ de referencia
-AnalizadorSQL::AnalizadorSQL(ArbolBPlus& arbol) : arbol(arbol) {
+// Constructor que crea 3 arboles dentro del Analizador SQL
+AnalizadorSQL::AnalizadorSQL()/*(ArbolBPlus& arbol) : arbol(arbol) */{
     arboles.emplace("clientes", ArbolBPlus(3));
     arboles.emplace("estudiantes", ArbolBPlus(3));
     arboles.emplace("libros", ArbolBPlus(3));
+    
 }
 
 // Función principal para analizar el comando SQL y redirigirlo al método adecuado
@@ -80,7 +81,7 @@ void AnalizadorSQL::analizarEliminar(std::istringstream& flujo) {
     std::string desde, tabla, donde, condicion;
     flujo >> desde >> tabla >> donde >> condicion;
 
-    arbol.eliminar(tabla, condicion);  // Ejecuta el comando en el árbol B+
+    // arboles[tabla].eliminar(tabla, condicion);  // Ejecuta el comando en el árbol B+
 }
 
 // Función auxiliar para procesar listas en formato (item1,item2)

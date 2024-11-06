@@ -28,19 +28,19 @@ void ArbolBPlus::insertarEnNoLleno(NodoBMas* nodo, Persona persona) {
     if (nodo->esHoja) {
         nodo->llaves.push_back(persona);
         std::sort(nodo->llaves.begin(), nodo->llaves.end(), [](const Persona& a, const Persona& b) {
-            return a.getEdad() < b.getEdad(); // Ordenar por edad
+            return a.getCriterio() < b.getCriterio(); // Ordenar por edad
         });
     } else {
         size_t i = 0;
 
 
-        while (i < nodo->llaves.size() && persona.getNombre() > nodo->llaves[i].getNombre()) {
+        while (i < nodo->llaves.size() && persona.getCriterio() > nodo->llaves[i].getCriterio()) {
             i++;
         }
         if (nodo->hijos[i]->llaves.size() == (size_t)maxLlaves) {
             NodoBMas* hijo = dividirHijo(nodo, i);
             nodo->hijos.insert(nodo->hijos.begin() + i + 1, hijo);
-            if (persona.getNombre() > nodo->llaves[i].getNombre()) i++;
+            if (persona.getCriterio() > nodo->llaves[i].getCriterio()) i++;
         }
 
 
@@ -66,19 +66,6 @@ NodoBMas* ArbolBPlus::dividirHijo(NodoBMas* nodo, int indice) {
     return nuevoNodo;
 }
 
-void ArbolBPlus::buscar(int edad) {
-    NodoBMas* nodo = raiz;
-    while (nodo) {
-        size_t i = 0;
-        while (i < nodo->llaves.size() && edad > nodo->llaves[i].getEdad()) i++;
-        if (i < nodo->llaves.size() && edad == nodo->llaves[i].getEdad()) {
-            std::cout << "Persona encontrada: " << nodo->llaves[i].getNombre() << ", Edad: " << nodo->llaves[i].getEdad() << "\n";
-            return;
-        }
-        nodo = (nodo->esHoja) ? nullptr : nodo->hijos[i];
-    }
-    std::cout << "Persona con edad " << edad << " no encontrada\n";
-}
 
 void ArbolBPlus::recorrer() {
     recorrerNodo(raiz);
@@ -127,9 +114,6 @@ void ArbolBPlus::mostrarArbolAux(NodoBMas* nodo, std::string prefix, bool esUlti
 
 
 
-
-
-
 ////////////////////////////////////////////////////////////////
 // Implementación del método insertar
 // Muestra en la consola el comando simulado de inserción con columnas y valores dados
@@ -163,6 +147,7 @@ void ArbolBPlus::insertar(const std::string& tabla, const std::vector<std::strin
     
 
 }
+
 
 // Implementación del método seleccionar
 // Muestra en la consola el comando simulado de selección con columnas especificadas
@@ -215,8 +200,6 @@ void ArbolBPlus::actualizar(const std::string& tabla, const std::map<std::string
 
 
 void ArbolBPlus::updateRecursivo(NodoBMas* nodo, const std::map<std::string, std::string>& asignaciones, const std::string& condicion) {
-
-
     if (!nodo) return;
     for (size_t i = 0; i < nodo->llaves.size(); i++) {
         if (!nodo->esHoja) updateRecursivo(nodo,asignaciones,condicion);
@@ -227,9 +210,6 @@ void ArbolBPlus::updateRecursivo(NodoBMas* nodo, const std::map<std::string, std
                
             }
         }
-
-
-        
     }
     if (!nodo->esHoja) updateRecursivo(nodo,asignaciones,condicion);
 
@@ -240,26 +220,6 @@ void ArbolBPlus::updateRecursivo(NodoBMas* nodo, const std::map<std::string, std
 void ArbolBPlus::eliminar(const std::string& tabla, const std::string& condicion) {
     std::cout << "Ejecutando: DELETE FROM " << tabla << " WHERE " << condicion << std::endl;
 
-}
-
-
-void ArbolBPlus::limpiar() {
-    limpiarNodo(raiz);
-    raiz = nullptr;
-}
-
-void ArbolBPlus::limpiarNodo(NodoBMas* nodo) {
-    if (!nodo) return;
-
-    // Si el nodo no es una hoja, primero elimina sus hijos
-    if (!nodo->esHoja) {
-        for (NodoBMas* hijo : nodo->hijos) {
-            limpiarNodo(hijo);  // Llamada recursiva para limpiar el hijo
-        }
-    }
-
-    // Elimina el nodo actual después de limpiar sus hijos
-    delete nodo;
 }
 
 

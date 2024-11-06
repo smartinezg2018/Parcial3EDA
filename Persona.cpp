@@ -9,17 +9,14 @@
 
 
 // Constructor por defecto
-Persona::Persona() : edad(0), nombre("") {}
-
-// Constructor parametrizado
-Persona::Persona(int e, std::string n) : edad(e), nombre(n) {}
+Persona::Persona() : nombre("") {}
 
 
 Persona::Persona(const std::vector<std::string>& columnas, const std::vector<std::string>& valores){
     for (int i = columnas.size()-1; i>=0 ;i--) {
         hashmap[columnas[i]]=valores[i];
     }
-    setNombre(valores[0]);
+    setCriterio(valores[0]);
 
 }
     // Constructor
@@ -34,23 +31,13 @@ void Persona::setValores(std::map<std::string, std::string> asignaciones){
 }
 
 
-// Método para obtener la edad
-int Persona::getEdad() const {
-    return edad;
-}
-
 // Método para obtener el nombre
-std::string Persona::getNombre() const {
+std::string Persona::getCriterio() const {
     return nombre;
 }
 
-// Método para establecer la edad
-void Persona::setEdad(int e) {
-    edad = e;
-}
-
 // Método para establecer el nombre
-void Persona::setNombre(std::string n) {
+void Persona::setCriterio(std::string n) {
     nombre = n;
 }
 

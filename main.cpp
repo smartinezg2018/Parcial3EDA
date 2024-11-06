@@ -4,8 +4,8 @@
 #include "AnalizadorSQL.h" // Encabezado del analizador SQL, que interpreta comandos SQL
 
 int main() {
-    ArbolBPlus arbol(3);                 // Instancia de ArbolBPlus para manejar operaciones de SQL
-    AnalizadorSQL analizador(arbol);  // Instancia de AnalizadorSQL que interpreta comandos
+                    // Instancia de ArbolBPlus para manejar operaciones de SQL
+    AnalizadorSQL analizador;  // Instancia de AnalizadorSQL que interpreta comandos
 
     std::string comando;
     while (true) {

@@ -14,7 +14,7 @@ class AnalizadorSQL {
 public:
     // Constructor de AnalizadorSQL que recibe una referencia al árbol B+
     
-    AnalizadorSQL(ArbolBPlus& arbol);
+    AnalizadorSQL();
 
     // Función principal para analizar y procesar el comando SQL recibido
     void analizar(const std::string& comando);
@@ -26,7 +26,7 @@ public:
 
 private:
     
-    ArbolBPlus& arbol;  // Referencia al árbol B+ para ejecutar comandos SQL
+    // ArbolBPlus& arbol;  // Referencia al árbol B+ para ejecutar comandos SQL
 
     // Funciones privadas que analizan comandos SQL específicos y los descomponen en parámetros
     void analizarInsertar(std::istringstream& flujo);
